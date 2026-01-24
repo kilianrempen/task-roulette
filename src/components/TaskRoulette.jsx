@@ -92,7 +92,14 @@ const TaskRoulette = () => {
 
   return (
     <div className="glass glass-hover text-gray-100 p-6 rounded-xl mb-6">
-      <h2 className="text-2xl font-bold mb-4 text-center">🎰 Task Roulette</h2>
+      <img 
+        src="/src/img/roulette.svg" 
+        alt="Task Roulette Logo" 
+        className="h-40 w-auto mb-4 mx-auto"
+      />
+      <h2 className="flex items-center justify-center gap-3 text-2xl font-bold mb-4 text-center">
+        Add tasks to the list and decide how long you'll work.</h2>
+      <h3 className="text-center text-gray-400 mb-4 text-lg ">Spin the wheel to let fate decide what you'll do!</h3>
       
       {!selectedTask && !isActive && (
         <div className="space-y-4">
