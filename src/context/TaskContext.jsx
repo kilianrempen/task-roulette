@@ -1,0 +1,89 @@
+import React, { createContext, useContext, useState } from 'react';
+
+const TaskContext = createContext();
+
+export const useTasks = () => {
+  const context = useContext(TaskContext);
+  if (!context) {
+    throw new Error('useTasks must be used within a TaskProvider');
+  }
+  return context;
+};
+
+export const TaskProvider = ({ children }) => {
+  const [tasks, setTasks] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState([]);
+
+  // Task operations
+  const addTask = (taskName) => {
+    const newTask = {
+      id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
+      name: taskName.trim()
+    };
+    setTasks([...tasks, newTask]);
+    return newTask.id;
+  };
+
+  const addTasks = (taskNames) => {
+    const newTasks = taskNames
+      .filter(taskName => taskName.trim())
+      .map((taskName) => ({
+        id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
+        name: taskName.trim()
+      }));
+    setTasks([...tasks, ...newTasks]);
+  };
+
+  const updateTask = (taskId, newName) => {
+    setTasks(tasks.map(t => 
+      t.id === taskId ? { ...t, name: newName } : t
+    ));
+  };
+
+  const deleteTask = (taskId) => {
+    setTasks(tasks.filter(t => t.id !== taskId));
+  };
+
+  // Get all tasks
+  const getAllTasks = () => {
+    return tasks;
+  };
+
+  // Complete task (move to completed)
+  const completeTask = (task) => {
+    // Remove from active tasks
+    setTasks(tasks.filter(t => t.id !== task.id));
+
+    // Add to completed tasks
+    setCompletedTasks([...completedTasks, { ...task, completedAt: Date.now() }]);
+  };
+
+  // Re-add completed task
+  const reAddTask = (completedTask) => {
+    const { completedAt, ...task } = completedTask;
+    setTasks([...tasks, task]);
+
+    // Remove from completed
+    setCompletedTasks(completedTasks.filter(t => t.id !== completedTask.id));
+  };
+
+  // Delete completed task forever
+  const deleteCompletedTask = (taskId) => {
+    setCompletedTasks(completedTasks.filter(t => t.id !== taskId));
+  };
+
+  const value = {
+    tasks,
+    completedTasks,
+    addTask,
+    addTasks,
+    updateTask,
+    deleteTask,
+    getAllTasks,
+    completeTask,
+    reAddTask,
+    deleteCompletedTask
+  };
+
+  return <TaskContext.Provider value={value}>{children}</TaskContext.Provider>;
+};
