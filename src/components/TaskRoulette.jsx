@@ -96,10 +96,20 @@ const TaskRoulette = () => {
           />
         </div>
       </div>
-      <h2 className="flex items-center justify-center gap-3 text-2xl font-bold mb-4 text-center">
-        Add tasks to the list and decide how long you'll work.</h2>
-      <h3 className="text-center text-gray-400 mb-4 text-lg ">Spin the wheel to let fate decide what you'll do!</h3>
-      
+
+      {/* Show a focused message while the timer is active, otherwise show the original headings */}
+      {isActive ? (
+        <h2 className="flex items-center justify-center gap-3 text-2xl font-bold mb-4 text-center">
+          It's time to focus on:
+        </h2>
+      ) : (
+        <>
+          <h2 className="flex items-center justify-center gap-3 text-2xl font-bold mb-4 text-center">
+            Add tasks to the list and decide how long you'll work.</h2>
+          <h3 className="text-center text-gray-400 mb-4 text-lg ">Spin the wheel to let fate decide what you'll do!</h3>
+        </>
+      )}
+
       {!selectedTask && !isActive && (
         <div className="space-y-4">
           <div className="flex flex-wrap gap-2 justify-center">
@@ -130,7 +140,7 @@ const TaskRoulette = () => {
       {selectedTask && (
         <div className="space-y-4 animate-fade-in">
           <div className="glass-dark rounded-lg p-4">
-            <h3 className="text-xl font-bold text-gray-100">{selectedTask.name}</h3>
+            <h3 className="text-xl font-bold text-gray-100 text-center">{selectedTask.name}</h3>
           </div>
 
           {isActive && (
@@ -147,13 +157,13 @@ const TaskRoulette = () => {
               <>
                 <button
                   onClick={handleMarkDone}
-                  className="flex-1 bg-[#2D5F5F] hover:bg-[#3D7F7F] text-gray-100 py-2 rounded-lg font-semibold transition-all transform hover:scale-105"
+                  className="flex-1 bg-[#2D5F5F] hover:bg-[#3D7F7F] text-gray-100 py-2 rounded-lg font-semibold transition-all transform"
                 >
                   ✓ Mark Done
                 </button>
                 <button
                   onClick={handleStop}
-                  className="flex-1 bg-gray-800/50 hover:bg-gray-800 text-gray-300 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 border border-gray-700"
+                  className="flex-1 bg-gray-800/50 hover:bg-gray-700 text-gray-300 py-2 rounded-lg font-semibold transition-all transform border border-gray-700"
                 >
                   Stop Timer
                 </button>
