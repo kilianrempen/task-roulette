@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background: transparent -->
+  <rect width="200" height="200" fill="transparent"></rect>
+
+  <!-- TR in swoopy, Japanese calligraphy style -->
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Brush Script MT, cursive" font-size="120" fill="#800020">
+    TR
+  </text>
+</svg>

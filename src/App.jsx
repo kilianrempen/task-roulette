@@ -2,6 +2,7 @@ import { TaskProvider } from './context/TaskContext';
 import TaskRoulette from './components/TaskRoulette';
 import MainTaskList from './components/MainTaskList';
 import CompletedTasks from './components/CompletedTasks';
+import TRLogo from './assets/TRLogo.svg'
 
 const AppContent = () => {
   return (
@@ -9,7 +10,7 @@ const AppContent = () => {
       <div className="max-w-4xl mx-auto">
       <h1 className="flex items-center justify-center text-4xl font-bold text-gray-100 mb-4 gap-3">
   <img 
-    src="/src/img/TRLogo.svg" 
+    src={TRLogo} 
     alt="Task Roulette Logo" 
     className="h-48 w-auto"
   />Task Roulette

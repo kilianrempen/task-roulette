@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTasks } from '../context/TaskContext';
+import Roulette from '../assets/roulette.svg';
 
 const TaskRoulette = () => {
   const { getAllTasks, completeTask } = useTasks();
@@ -93,7 +94,7 @@ const TaskRoulette = () => {
   return (
     <div className="glass glass-hover text-gray-100 p-6 rounded-xl mb-6">
       <img 
-        src="/src/img/roulette.svg" 
+        src={Roulette} 
         alt="Task Roulette Logo" 
         className="h-40 w-auto mb-4 mx-auto"
       />
