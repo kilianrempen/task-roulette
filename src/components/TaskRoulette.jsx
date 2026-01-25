@@ -63,13 +63,6 @@ const TaskRoulette = () => {
     }, 100);
   };
 
-  const handleTimerComplete = () => {
-    if (selectedTask) {
-      completeTask(selectedTask);
-      setSelectedTask(null);
-    }
-  };
-
   const handleMarkDone = () => {
     if (selectedTask) {
       completeTask(selectedTask);
@@ -93,11 +86,16 @@ const TaskRoulette = () => {
 
   return (
     <div className="glass glass-hover text-gray-100 p-6 rounded-xl mb-6">
-      <img 
-        src={Roulette} 
-        alt="Task Roulette Logo" 
-        className="h-40 w-auto mb-4 mx-auto"
-      />
+      {/* Single SVG that we rotate in-place. Use fast spin while selecting, slow continuous spin while timer is active. */}
+      <div className="relative mb-4 mx-auto h-40 w-40">
+        <div className={`wheel-wrap ${isSpinning ? 'scale-up' : ''} absolute inset-0 m-auto h-full w-full flex items-center justify-center`}>
+          <img
+            src={Roulette}
+            alt="Task Roulette Logo"
+            className={`h-full w-full object-contain transform-gpu ${isSpinning ? 'spin-fast' : isActive ? 'spin-slow' : ''}`}
+          />
+        </div>
+      </div>
       <h2 className="flex items-center justify-center gap-3 text-2xl font-bold mb-4 text-center">
         Add tasks to the list and decide how long you'll work.</h2>
       <h3 className="text-center text-gray-400 mb-4 text-lg ">Spin the wheel to let fate decide what you'll do!</h3>

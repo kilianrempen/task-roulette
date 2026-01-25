@@ -62,4 +62,36 @@
       transform: rotate(360deg) scale(1);
     }
   }
+
+  /* Continuous spin (no scale) used while timer is active or during selection */
+  @keyframes spinForever {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .spin-slow {
+    animation: spinForever 4s linear infinite;
+    transform-origin: center;
+  }
+
+  /* Fast spin uses the same rotation keyframe but faster; scaling is handled by a wrapper to allow smooth transitions */
+  .spin-fast {
+    animation: spinForever 0.8s linear infinite;
+    transform-origin: center;
+  }
+
+  /* Wrapper that handles smooth scaling when we want the wheel to grow/shrink */
+  .wheel-wrap {
+    display: inline-block;
+    transition: transform 360ms cubic-bezier(.2,.9,.3,1);
+    transform-origin: center center;
+  }
+
+  .wheel-wrap.scale-up {
+    transform: scale(1.15);
+  }
 }
