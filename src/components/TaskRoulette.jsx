@@ -3,7 +3,7 @@ import { useTasks } from '../context/TaskContext';
 import Roulette from '../assets/roulette.svg';
 
 const TaskRoulette = () => {
-  const { getAllTasks, completeTask, fetchOpenRouterMessage } = useTasks();
+  const { getAllTasks, completeTask } = useTasks();
   const [selectedTask, setSelectedTask] = useState(null);
   const [timerDuration, setTimerDuration] = useState(15);
   const [timeRemaining, setTimeRemaining] = useState(0);
@@ -56,13 +56,6 @@ const TaskRoulette = () => {
         const randomIndex = Math.floor(Math.random() * allTasks.length);
         const task = allTasks[randomIndex];
         setSelectedTask(task);
-        // Kick off an async request to OpenRouter so the message is ready by completion time
-        try {
-          fetchOpenRouterMessage(task.name);
-        } catch (err) {
-          // swallow errors here; fetchOpenRouterMessage handles its own errors
-          console.error('fetchOpenRouterMessage error:', err);
-        }
         setTimeRemaining(timerDuration * 60); // Convert minutes to seconds
         setIsActive(true);
         setIsSpinning(false);
