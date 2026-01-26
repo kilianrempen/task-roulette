@@ -3,6 +3,7 @@ import TaskRoulette from './components/TaskRoulette';
 import MainTaskList from './components/MainTaskList';
 import CompletedTasks from './components/CompletedTasks';
 import TRLogo from './assets/TRLogo.svg'
+import CongratsModal from './components/CongratsModal';
 
 const AppContent = () => {
   return (
@@ -22,6 +23,7 @@ const AppContent = () => {
 
         <CompletedTasks />
       </div>
+     <CongratsModal />
     </div>
   );
 };
