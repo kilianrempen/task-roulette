@@ -3,17 +3,33 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Transition timing and easing for a smoother, calmer UI */
+    --trans-fast: 180ms;
+    --trans-base: 300ms;
+    --trans-slow: 420ms;
+    --ease: cubic-bezier(.2,.9,.3,1);
+  }
+
   body {
     @apply bg-gray-900 text-gray-100;
   }
 }
 
 @layer utilities {
+  /* Apply subtle, consistent transitions to common interactive elements */
+  button, a, input, select, textarea {
+    transition-property: background-color, color, border-color, transform, box-shadow;
+    transition-duration: var(--trans-base);
+    transition-timing-function: var(--ease);
+  }
+
   .glass {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color var(--trans-base) var(--ease), border-color var(--trans-base) var(--ease), box-shadow var(--trans-base) var(--ease);
   }
 
   .glass-dark {
@@ -21,10 +37,12 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color var(--trans-base) var(--ease), border-color var(--trans-base) var(--ease), box-shadow var(--trans-base) var(--ease);
   }
 
   .glass-hover {
-    transition: all 0.3s ease;
+    /* Favor specific properties over 'all' to avoid janky repaints */
+    transition: background-color var(--trans-base) var(--ease), border-color var(--trans-base) var(--ease), transform var(--trans-fast) var(--ease);
   }
 
   .glass-hover:hover {
@@ -32,14 +50,15 @@
     border-color: rgba(255, 255, 255, 0.15);
   }
 
+  /* A gentle, slightly slower fade-in to reduce perceptual jank */
   .animate-fade-in {
-    animation: fadeIn 0.5s ease-in;
+    animation: fadeIn var(--trans-slow) var(--ease) both;
   }
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(-10px);
+      transform: translateY(-8px);
     }
     to {
       opacity: 1;
@@ -47,8 +66,9 @@
     }
   }
 
+  /* Spin animations: slower and smoother easing where appropriate */
   .animate-spin-roulette {
-    animation: spinRoulette 1s ease-in-out;
+    animation: spinRoulette 1.2s var(--ease);
   }
 
   @keyframes spinRoulette {
@@ -56,7 +76,7 @@
       transform: rotate(0deg) scale(1);
     }
     50% {
-      transform: rotate(180deg) scale(1.1);
+      transform: rotate(180deg) scale(1.08);
     }
     100% {
       transform: rotate(360deg) scale(1);
@@ -73,25 +93,37 @@
     }
   }
 
+  /* Slightly slower continuous spin for a calmer vibe */
   .spin-slow {
-    animation: spinForever 4s linear infinite;
+    animation: spinForever 6s linear infinite;
     transform-origin: center;
   }
 
-  /* Fast spin uses the same rotation keyframe but faster; scaling is handled by a wrapper to allow smooth transitions */
+  /* Fast spin still quick but feels more organic */
   .spin-fast {
-    animation: spinForever 0.8s linear infinite;
+    animation: spinForever 1s linear infinite;
     transform-origin: center;
   }
 
   /* Wrapper that handles smooth scaling when we want the wheel to grow/shrink */
   .wheel-wrap {
     display: inline-block;
-    transition: transform 360ms cubic-bezier(.2,.9,.3,1);
+    transition: transform var(--trans-slow) var(--ease);
     transform-origin: center center;
   }
 
   .wheel-wrap.scale-up {
-    transform: scale(1.15);
+    transform: scale(1.12);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
