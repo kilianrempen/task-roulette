@@ -30,7 +30,7 @@ const CongratsModal = () => {
         }}
       >
         <h3 className="text-3xl font-bold text-center mb-2" style={{ color: '#e6e7e8' }}>Congratulations.</h3>
-        <p className="text-center mb-6" style={{ color: '#c7c9cc' }}>Nice work — take a breath, then move on when you're ready.</p>
+        <p className="text-center mb-6" style={{ color: '#c7c9cc' }}>The task fades away<br/>Empty hands meet the next step<br/>The path keeps moving.</p>
         <div className="flex justify-center">
           <button
             onClick={closeCongrats}
