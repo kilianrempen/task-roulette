@@ -166,7 +166,7 @@ const TaskRoulette = () => {
         ) : (
             <>
               <h2 className="flex items-center justify-center gap-3 text-2xl font-bold mb-4 text-center">
-                POOOOOOP!!!Add tasks to the list and decide how long you'll work.</h2>
+                Add tasks to the list and decide how long you'll work.</h2>
               <h3 className="text-center text-gray-400 mb-4 text-lg ">Spin the wheel to let fate decide what you'll do!</h3>
             </>
         )}
