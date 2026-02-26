@@ -82,6 +82,22 @@ const TaskRoulette = () => {
     }
   }, [timeRemaining, isActive, selectedTask, completeTask]);
 
+  useEffect(() => {
+    // Listen for global 'start-task' events from Task items
+    const handleStartEvent = (e) => {
+      const task = e?.detail?.task || (e?.detail && e.detail.task);
+      if (!task) return;
+      setSelectedTask(task);
+      setTimeRemaining(timerDuration * 60);
+      setIsActive(true);
+      setIsPaused(false);
+      setIsSpinning(false);
+    };
+
+    window.addEventListener('start-task', handleStartEvent);
+    return () => window.removeEventListener('start-task', handleStartEvent);
+  }, [timerDuration]);
+
   const spinRoulette = () => {
     const allTasks = getAllTasks();
     if (allTasks.length === 0) {
