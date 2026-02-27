@@ -7,7 +7,8 @@ import CongratsModal from './components/CongratsModal';
 
 const AppContent = () => {
   return (
-    <div className="min-h-screen bg-gray-900 py-6 px-4">
+    // enable vertical scrolling when content grows by adding overflow-y-auto
+    <div className="min-h-screen bg-gray-900 py-6 px-4 overflow-y-auto">
       <div className="max-w-4xl mx-auto">
       <h1 className="flex items-center justify-center text-4xl font-bold text-gray-100 mb-4 gap-3">
   <img 
