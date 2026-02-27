@@ -3,7 +3,7 @@ import { useTasks } from '../context/TaskContext';
 import Task from './Task';
 
 const MainTaskList = () => {
-  const { tasks, addTask, addTasks } = useTasks();
+  const { tasks, addTask, addTasks, clearAllTasks, completedTasks } = useTasks();
   const [showAddTask, setShowAddTask] = useState(false);
   const [newTaskName, setNewTaskName] = useState('');
   const [showBulkAdd, setShowBulkAdd] = useState(false);
@@ -187,6 +187,22 @@ const MainTaskList = () => {
           </button>
         </div>
       </div>
+
+      {/* Reset all button placed at bottom of tasks section */}
+      {(tasks.length > 0 || completedTasks.length > 0) && (
+        <div className="mt-4 flex justify-end">
+          <button
+            onClick={() => {
+              if (confirm('Clear all tasks and completed tasks? This cannot be undone.')) {
+                clearAllTasks();
+              }
+            }}
+            className="px-4 py-2 bg-transparent hover:bg-red-700/30 text-red-100 border border-[#722F37] rounded-lg text-sm transition-colors"
+          >
+            Reset All
+          </button>
+        </div>
+      )}
     </div>
   );
 };
